@@ -42,17 +42,31 @@ class BinarySearchTree {
     if (!this.root) return false;
 
     var current = this.root;
-    var found = false;
 
-    while (current && !found) {
-      if (value === current.value) {
-        return true;
-      } else if (value < current.value) {
+    while (current) {
+      if (value < current.value) {
         current = current.left;
       } else if (value > current.value) {
         current = current.right;
+      } else {
+        return true;
       }
     }
+    return false;
+  }
+  BreadthFirstSearch() {
+    var data = [];
+    var queue = [];
+    var node = this.root;
+
+    queue.push(node);
+    while (queue.length) {
+      node = queue.shift();
+      data.push(node);
+      if (node.left) queue.push(node.left);
+      if (node.right) queue.push(node.right);
+    }
+    return data;
   }
 }
 
